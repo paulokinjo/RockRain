@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>D:/repos/xna/RockRain/RockRain/Content/audios/explosion.wav</SourceFile>
+  <SourceTime>2018-09-17T23:39:46.5482998-04:00</SourceTime>
+  <DestFile>D:/repos/xna/RockRain/RockRain/Content/bin/Windows/audios/explosion.xnb</DestFile>
+  <DestTime>2018-09-17T23:43:31.6508381-04:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2018-09-06T09:51:44-04:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2018-09-06T09:51:44-04:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

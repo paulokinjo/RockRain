@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>D:/repos/xna/RockRain/RockRain/Content/audios/backmusic.mp3</SourceFile>
+  <SourceTime>2018-09-17T23:39:46.546298-04:00</SourceTime>
+  <DestFile>D:/repos/xna/RockRain/RockRain/Content/bin/Windows/Content/audios/backmusic.xnb</DestFile>
+  <DestTime>2018-09-17T23:45:45.6400825-04:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2018-09-06T09:51:44-04:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2018-09-06T09:51:44-04:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>D:/repos/xna/RockRain/RockRain/Content/bin/Windows/Content/audios/backmusic.wma</string>
+  </BuildOutput>
+</PipelineBuildEvent>

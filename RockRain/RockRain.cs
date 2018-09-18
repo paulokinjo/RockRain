@@ -7,14 +7,18 @@ namespace RockRain
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class RockRain : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+        private Texture2D _spaceBackground;
 
-        public Game1()
-        {
-            graphics = new GraphicsDeviceManager(this);
+        public RockRain()
+        {                       
+            _graphics = new GraphicsDeviceManager(this);
+            _graphics.PreferredBackBufferWidth = 1024;
+            _graphics.PreferredBackBufferHeight = 765;
+
             Content.RootDirectory = "Content";
         }
 
@@ -38,9 +42,10 @@ namespace RockRain
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            _spaceBackground = Content.Load<Texture2D>(@"images\SpaceBackground");
         }
 
         /// <summary>
@@ -76,6 +81,16 @@ namespace RockRain
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(
+                _spaceBackground,
+                new Rectangle(
+                    0,
+                    0,
+                    _graphics.GraphicsDevice.DisplayMode.Width,
+                    _graphics.GraphicsDevice.DisplayMode.Height),
+                Color.LightGray);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

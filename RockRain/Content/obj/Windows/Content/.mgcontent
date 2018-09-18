@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>D:/repos/xna/RockRain/RockRain/Content/audios/backmusic.mp3</File>
+    <File>D:/repos/xna/RockRain/RockRain/Content/audios/explosion.wav</File>
+    <File>D:/repos/xna/RockRain/RockRain/Content/audios/newmeteor.wav</File>
+    <File>D:/repos/xna/RockRain/RockRain/Content/fonts/font.spritefont</File>
+    <File>D:/repos/xna/RockRain/RockRain/Content/images/RockRain.png</File>
+    <File>D:/repos/xna/RockRain/RockRain/Content/images/SpaceBackground.dds</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
