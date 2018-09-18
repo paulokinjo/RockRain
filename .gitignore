@@ -1,3 +1,13 @@
 db.lock
 *bin*
-*obj*
+*RockRain/obj/*
+*Debug/*
+*RockRain/.vs/*
+*.suo*
+RockRain/.vs/RockRain
+RockRain/.vs/RockRain/v15/.suo
+RockRain/obj/x86/Debug
+RockRain/obj/x86/Debug/RockRain.csproj.CopyComplete
+RockRain/obj/x86/Debug/RockRain.csproj.CoreCompileInputs.cache
+RockRain/obj/x86/Debug/RockRain.csproj.FileListAbsolute.txt
+RockRain/obj/x86/Debug/RockRain.csprojAssemblyReference.cache
