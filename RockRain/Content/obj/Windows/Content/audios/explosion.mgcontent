@@ -3,7 +3,7 @@
   <SourceFile>D:/repos/xna/RockRain/RockRain/Content/audios/explosion.wav</SourceFile>
   <SourceTime>2018-09-17T23:39:46.5482998-04:00</SourceTime>
   <DestFile>D:/repos/xna/RockRain/RockRain/Content/bin/Windows/Content/audios/explosion.xnb</DestFile>
-  <DestTime>2018-09-17T23:45:45.8555355-04:00</DestTime>
+  <DestTime>2018-09-22T11:05:35.9542336-04:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2018-09-06T09:51:44-04:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace RockRain
 {
@@ -11,14 +13,27 @@ namespace RockRain
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Texture2D _spaceBackground;
+
+        private const int START_METEOR_COUNT = 10;
+        private const int ADD_METEOR_TIME = 1000;
+
+        private Texture2D _backgroundTexture;
+        private Texture2D _rockRainTexture;
+        private Ship _player;
+        private int _lastTickCount;
+        private int _rockCount;
+
+        private SoundEffect _explosion;
+        private SoundEffect _newMeteor;
+        private Song _backMusic;
+
+        private SpriteFont _gameFont;
 
         public RockRain()
-        {                       
+        {
             _graphics = new GraphicsDeviceManager(this);
             _graphics.PreferredBackBufferWidth = 1024;
             _graphics.PreferredBackBufferHeight = 765;
-
             Content.RootDirectory = "Content";
         }
 
@@ -30,8 +45,7 @@ namespace RockRain
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            // TODO: Add your initialization logic here                 
             base.Initialize();
         }
 
@@ -43,9 +57,20 @@ namespace RockRain
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Services.AddService(_spriteBatch);
+
+            _backgroundTexture = Content.Load<Texture2D>(@"images/SpaceBackground");
+            _rockRainTexture = Content.Load<Texture2D>(@"images/RockRain");
+
+            _explosion = Content.Load<SoundEffect>(@"audios/explosion");
+            _newMeteor = Content.Load<SoundEffect>(@"audios/newmeteor");
+            _backMusic = Content.Load<Song>(@"audios/backmusic");
+
+            MediaPlayer.Play(_backMusic);
+
+            _gameFont = Content.Load<SpriteFont>(@"fonts/font");
 
             // TODO: use this.Content to load your game content here
-            _spaceBackground = Content.Load<Texture2D>(@"images\SpaceBackground");
         }
 
         /// <summary>
@@ -55,6 +80,7 @@ namespace RockRain
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            _backgroundTexture.Dispose();
         }
 
         /// <summary>
@@ -68,7 +94,12 @@ namespace RockRain
                 Exit();
 
             // TODO: Add your update logic here
+            if(_player == null)
+            {
+                Start();
+            }
 
+            DoGameLogic();
             base.Update(gameTime);
         }
 
@@ -82,17 +113,84 @@ namespace RockRain
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            _spriteBatch.Draw(
-                _spaceBackground,
-                new Rectangle(
-                    0,
-                    0,
-                    _graphics.GraphicsDevice.DisplayMode.Width,
-                    _graphics.GraphicsDevice.DisplayMode.Height),
+            _spriteBatch.Draw(_backgroundTexture,
+                new Rectangle(0, 0, _graphics.GraphicsDevice.DisplayMode.Width, _graphics.GraphicsDevice.DisplayMode.Height),
                 Color.LightGray);
+
+            _spriteBatch.DrawString(_gameFont, "Rocks: " + _rockCount.ToString(),
+                new Vector2(15, 15), Color.YellowGreen);
             _spriteBatch.End();
 
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             base.Draw(gameTime);
+            _spriteBatch.End();
         }
+
+        private void Start()
+        {
+            _lastTickCount = System.Environment.TickCount;
+            _rockCount = START_METEOR_COUNT;
+
+            if (_player == null)
+            {
+                _player = new Ship(this, ref _rockRainTexture);
+                Components.Add(_player);
+            }
+
+            _player.PutInStartPosition();
+
+            for (int i = 0; i < START_METEOR_COUNT; i++)
+            {
+                AddNewMeteor();
+            }
+        }
+
+        private void DoGameLogic()
+        {
+            bool hasCollision = false;
+            Rectangle shipRectangle = _player.GetBounds();
+            foreach (GameComponent gc in Components)
+            {
+                if(gc is Meteor)
+                {
+                    hasCollision = ((Meteor)gc).CheckCollision(shipRectangle);
+                    if (hasCollision)
+                    {
+                        RemoveAllMeteors();
+                        _explosion.Play();
+                        Start();
+
+                        break;
+                    }
+                }
+            }
+            CheckForNewMeteor();
+        }
+
+        private void RemoveAllMeteors()
+        {
+            for (int i = 0; i < Components.Count; i++)
+            {
+                if(Components[i] is Meteor)
+                {
+                    Components.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        private void CheckForNewMeteor()
+        {
+            if((System.Environment.TickCount - _lastTickCount) > ADD_METEOR_TIME)
+            {
+                _lastTickCount = System.Environment.TickCount;
+                AddNewMeteor();
+                _rockCount++;
+                _newMeteor.Play();
+            }
+        }
+
+        private void AddNewMeteor() =>
+            Components.Add(new Meteor(this, ref _rockRainTexture));
     }
 }
